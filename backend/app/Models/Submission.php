@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Submission extends Model
 {
-  protected $fillable = [
-    'name',
-    'email',
-    'phone',
-    'message',
-    'file_name'
-  ];
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'message',
+        'file_name'
+    ];
 }
