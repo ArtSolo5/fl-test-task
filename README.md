@@ -1,8 +1,8 @@
-# Contact Form - Middle Fullstack Developer Test Task
+# Contact Form - Test Task
 
 ## Опис завдання
 
-Це тестове завдання на позицію Middle Fullstack Developer. Потрібно було створити контактну форму з можливістю завантаження резюме.
+Це тестове завдання в якому потрібно було створити контактну форму з можливістю завантаження резюме.
 
 ## Архітектура проекту
 
@@ -155,46 +155,3 @@ Frontend буде доступний за адресою: http://localhost:3000
 3. Спробуйте відправити форму з різними комбінаціями полів
 4. Перевірте, що дані зберігаються в базі даних
 5. Перевірте, що email відправляється в Mailtrap
-
-## Структура проекту
-
-```
-fl-test-task/
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── ContactForm.vue
-│   │   │   ├── TextInput.vue
-│   │   │   ├── PhoneInput.vue
-│   │   │   ├── TheButton.vue
-│   │   │   ├── TheTextarea.vue
-│   │   │   ├── TheCheckbox.vue
-│   │   │   └── UploadFile.vue
-│   │   ├── App.vue
-│   │   └── main.js
-│   ├── index.html
-│   ├── package.json
-│   └── vite.config.js
-└── backend/
-    ├── app/
-    │   ├── Http/
-    │   │   └── Controllers/
-    │   │       └── SubmissionController.php
-    │   │   └── Requests/
-    │   │       └── StoreSubmissionRequest.php
-    │   └── Models/
-    │       └── Submission.php
-    ├── database/
-    │   └── migrations/
-    └── routes/
-        └── api.php
-```
-
-## Особливості реалізації
-
-- Використовується розділена архітектура frontend/backend
-- Валідація відбувається як на фронтенді, так і на бекенді
-- Телефонне поле використовує міжнародну бібліотеку з підтримкою країн
-- Файли зберігаються локально (можна легко змінити на cloud storage)
-- Email відправляється на адресу, вказану в формі
-- Форма має адаптивний дизайн
