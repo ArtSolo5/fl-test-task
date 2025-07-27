@@ -1,1 +1,7 @@
 @import 'tailwindcss';
+@import './fonts.css';
+
+body {
+  font-family: 'Geometria', sans-serif;
+}
+
