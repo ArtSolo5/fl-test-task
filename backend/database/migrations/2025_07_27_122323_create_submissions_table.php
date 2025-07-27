@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('submissions', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 35);
+            $table->string('email', 35);
+            $table->string('phone', 15);
+            $table->text('message')->nullable();
+            $table->string('file_name', 255)->nullable();
             $table->timestamps();
         });
     }
