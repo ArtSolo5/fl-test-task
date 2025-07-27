@@ -77,7 +77,7 @@ const submitForm = async (values) => {
     formData.append('email', values.email);
     formData.append('phone', values.phone);
     formData.append('message', values.message || '');
-    formData.append('consent', values.consent);
+    formData.append('consent', values.consent ? '1' : '0');
     
     if (values.file) {
       formData.append('file', values.file);

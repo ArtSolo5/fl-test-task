@@ -11,6 +11,7 @@ class Submission extends Model
         'email',
         'phone',
         'message',
+        'consent',
         'file_name'
     ];
 }

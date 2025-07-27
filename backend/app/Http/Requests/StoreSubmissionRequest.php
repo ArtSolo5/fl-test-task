@@ -28,6 +28,7 @@ class StoreSubmissionRequest extends FormRequest
             'email' => 'required|email|max:35',
             'phone' => 'required|string|max:15',
             'message' => 'nullable|string|max:500',
+            'consent' => 'required|boolean',
             'file' => 'nullable|file|image|max:2048',
         ];
     }
@@ -46,6 +47,7 @@ class StoreSubmissionRequest extends FormRequest
             'phone.required' => 'Телефон обов\'язковий',
             'phone.max' => 'Телефон не може бути довшим за 15 символів',
             'message.max' => 'Повідомлення не може бути довшим за 500 символів',
+            'consent.required' => 'Згода обов\'язкова',
             'file.file' => 'Файл повинен бути завантажений',
             'file.image' => 'Дозволені тільки зображення',
             'file.max' => 'Розмір файлу не може перевищувати 2MB',

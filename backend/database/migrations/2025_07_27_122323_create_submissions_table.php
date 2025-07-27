@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email', 35);
             $table->string('phone', 15);
             $table->text('message')->nullable();
+            $table->boolean('consent')->default(false);
             $table->string('file_name', 255)->nullable();
             $table->timestamps();
         });
