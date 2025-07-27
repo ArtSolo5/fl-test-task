@@ -13,11 +13,27 @@ const formData = ref({
   consent: false,
 });
 
-const handleSubmit = () => {
-  console.log(formData.value);
+const isSubmitting = ref(false);
+
+const handleSubmit = async () => {
+  if (isSubmitting.value) return;
+  
+  isSubmitting.value = true;
+  try {
+    await fetch('http://localhost:8000/api/submissions', {
+      method: 'POST',
+      body: JSON.stringify(formData.value),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  } finally {
+    isSubmitting.value = false;
+  }
 };
 </script>
-
 <template>
   <form @submit.prevent="handleSubmit" class="w-full max-w-[578px]">
     <h1 class="font-normal text-5xl leading-[54px] tracking-[-0.02em] mb-5">Надіслати резюме</h1>
@@ -63,7 +79,7 @@ const handleSubmit = () => {
         label="Додати резюме"
       />
 
-      <TheButton type="submit" label="Надіслати" />
+      <TheButton type="submit" :disabled="isSubmitting" label="Надіслати" />
     </div>
   </form>
 </template>
