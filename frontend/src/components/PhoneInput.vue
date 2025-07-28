@@ -21,10 +21,6 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue']);
 
 const number = ref('');
-const isValid = ref(false);
-const errorCode = ref('');
-
-const phoneInputRef = ref(null);
 
 onMounted(() => {
   number.value = props.modelValue;
@@ -39,22 +35,6 @@ watch(() => props.modelValue, (newValue) => {
     number.value = newValue;
   }
 });
-
-const handleChangeValidity = (value) => {
-  isValid.value = value;
-};
-
-const handleChangeErrorCode = (value) => {
-  errorCode.value = value;
-};
-
-const isValidNumber = () => {
-  return isValid.value;
-};
-
-defineExpose({
-  isValidNumber
-});
 </script>
 
 <template>
@@ -62,9 +42,6 @@ defineExpose({
     <IntlTelInput
       v-model="number"
       class="w-full px-4 py-3 border border-[#D1D1D1] bg-white font-normal text-[17px] leading-6 tracking-[-0.01em]"
-      ref="phoneInputRef"
-      @changeValidity="handleChangeValidity"
-      @changeErrorCode="handleChangeErrorCode"
       :options="{
         initialCountry: 'ua',
         preferredCountries: ['ua'],

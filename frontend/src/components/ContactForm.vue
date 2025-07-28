@@ -63,7 +63,6 @@ const { errors, values, setFieldValue, resetForm, validate } = useForm({
 
 const isSubmitting = ref(false);
 const hasSubmitted = ref(false);
-const phoneInputRef = ref(null);
 
 const submitForm = async (values) => {
   if (isSubmitting.value) return;
@@ -157,7 +156,6 @@ const showError = (fieldName) => {
         :model-value="values.phone"
         @update:model-value="updatePhone"
         :error="showError('phone')"
-        ref="phoneInputRef"
       />
     </div>
 
@@ -189,7 +187,7 @@ const showError = (fieldName) => {
         :error="showError('file')"
       />
 
-      <TheButton class="disabled:opacity-50" type="submit" :disabled="isSubmitting" label="Надіслати" />
+      <TheButton type="submit" :disabled="isSubmitting" label="Надіслати" />
     </div>
   </form>
 </template>
