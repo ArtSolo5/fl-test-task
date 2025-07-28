@@ -14,4 +14,8 @@ class Submission extends Model
         'consent',
         'file_name'
     ];
+
+    protected $casts = [
+        'consent' => 'boolean',
+    ];
 }

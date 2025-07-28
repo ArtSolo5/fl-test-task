@@ -2,36 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Submission;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\FormSubmitted;
-use Illuminate\Support\Facades\Log;
+use App\Services\SubmissionService;
+use App\Services\EmailService;
 use App\Http\Requests\StoreSubmissionRequest;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\JsonResponse;
 
 class SubmissionsController extends Controller
 {
-  public function store(StoreSubmissionRequest $request)
-  {
-    try {
-      $validated = $request->validated();
+    public function __construct(
+        private SubmissionService $submissionService,
+        private EmailService $emailService
+    ) {}
 
-      $submission = Submission::create($validated);
+    public function store(StoreSubmissionRequest $request): JsonResponse
+    {
+        try {
+            $validated = $request->validated();
 
-      if ($request->hasFile('file')) {
-        $file = $request->file('file');
-        $fileName = $file->getClientOriginalName();
-        $file->move(storage_path('app/submissions/' . $submission->id . '/uploads'), $fileName);
-        $submission->file_name = $fileName;
-        $submission->save();
-      }
+            $submission = $this->submissionService->createSubmission($validated);
 
-      Mail::to($validated['email'])->send(new FormSubmitted($submission));
+            $this->emailService->sendSubmissionEmail($submission);
 
-      return response()->json($submission, 201);
-    } catch (\Exception $e) {
-      Log::error('Error submitting form: ' . $e->getMessage());
+            return response()->json($submission, 201);
+        } catch (\Exception $e) {
+            Log::error('Error submitting form: ' . $e->getMessage());
 
-      return response()->json(['error' => 'Failed to submit form'], 500);
+            return response()->json(['error' => 'Failed to submit form'], 500);
+        }
     }
-  }
 }

@@ -17,6 +17,18 @@ class StoreSubmissionRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        if ($this->has('consent')) {
+            $this->merge([
+                'consent' => $this->consent === '1' || $this->consent === true
+            ]);
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
@@ -28,7 +40,7 @@ class StoreSubmissionRequest extends FormRequest
             'email' => 'required|email|max:35',
             'phone' => 'required|string|max:15',
             'message' => 'nullable|string|max:500',
-            'consent' => 'required|boolean',
+            'consent' => 'required|accepted',
             'file' => 'nullable|file|image|max:2048',
         ];
     }
@@ -47,7 +59,8 @@ class StoreSubmissionRequest extends FormRequest
             'phone.required' => 'Телефон обов\'язковий',
             'phone.max' => 'Телефон не може бути довшим за 15 символів',
             'message.max' => 'Повідомлення не може бути довшим за 500 символів',
-            'consent.required' => 'Згода обов\'язкова',
+            'consent.required' => 'Необхідна згода на обробку персональних даних',
+            'consent.accepted' => 'Необхідна згода на обробку персональних даних',
             'file.file' => 'Файл повинен бути завантажений',
             'file.image' => 'Дозволені тільки зображення',
             'file.max' => 'Розмір файлу не може перевищувати 2MB',
